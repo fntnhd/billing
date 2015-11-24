@@ -50,9 +50,9 @@ public class AccountDaoTest {
     public void testFindAccountByPhoneNumber() {
         BillingPlan billingPlan = billingPlan("0.10");
 
-        accountDao.createAccount("206-555-1212", billingPlan);
-        accountDao.createAccount("703-555-1212", billingPlan);
-        accountDao.createAccount("425-555-1212", billingPlan);
+        account("206-555-1212", billingPlan);
+        account("703-555-1212", billingPlan);
+        account("425-555-1212", billingPlan);
 
         Account account = accountDao.findAccountByPhoneNumber("703-555-1212");
 
@@ -64,5 +64,9 @@ public class AccountDaoTest {
         billingPlan.setBillingRate(new BigDecimal(rate));
 
         return billingPlan;
+    }
+
+    private Account account(String phoneNumber, BillingPlan billingPlan) {
+        return accountDao.createAccount(phoneNumber, billingPlan);
     }
 }
