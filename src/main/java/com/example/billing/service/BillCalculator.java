@@ -1,11 +1,11 @@
-package devops.demo.billing.service;
+package com.example.billing.service;
 
 
-import devops.demo.billing.data.BillingDao;
-import devops.demo.billing.entity.Account;
-import devops.demo.billing.entity.AccountUsageCharge;
-import devops.demo.billing.entity.Bill;
-import devops.demo.billing.entity.BillingPeriod;
+import com.example.billing.data.BillingDao;
+import com.example.billing.entity.Account;
+import com.example.billing.entity.AccountUsageCharge;
+import com.example.billing.entity.Bill;
+import com.example.billing.entity.BillingPeriod;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

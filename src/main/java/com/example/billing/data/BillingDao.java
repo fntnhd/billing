@@ -1,8 +1,8 @@
-package devops.demo.billing.data;
+package com.example.billing.data;
 
-import devops.demo.billing.entity.Account;
-import devops.demo.billing.entity.AccountUsageCharge;
-import devops.demo.billing.entity.BillingPeriod;
+import com.example.billing.entity.Account;
+import com.example.billing.entity.AccountUsageCharge;
+import com.example.billing.entity.BillingPeriod;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

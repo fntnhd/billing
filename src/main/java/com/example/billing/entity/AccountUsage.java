@@ -1,6 +1,4 @@
-package devops.demo.billing.entity;
-
-import devops.demo.billing.entity.Account;
+package com.example.billing.entity;
 
 import java.time.LocalDateTime;
 

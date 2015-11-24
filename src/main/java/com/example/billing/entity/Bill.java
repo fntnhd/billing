@@ -1,4 +1,4 @@
-package devops.demo.billing.entity;
+package com.example.billing.entity;
 
 import java.math.BigDecimal;
 import java.util.List;

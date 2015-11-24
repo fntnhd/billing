@@ -1,6 +1,4 @@
-package devops.demo.billing.entity;
-
-import devops.demo.billing.entity.AccountUsage;
+package com.example.billing.entity;
 
 import java.math.BigDecimal;
 

@@ -1,9 +1,9 @@
-package devops.demo.billing.data.impl;
+package com.example.billing.data.impl;
 
-import devops.demo.billing.data.BillingDao;
-import devops.demo.billing.entity.Account;
-import devops.demo.billing.entity.AccountUsageCharge;
-import devops.demo.billing.entity.BillingPeriod;
+import com.example.billing.data.BillingDao;
+import com.example.billing.entity.Account;
+import com.example.billing.entity.AccountUsageCharge;
+import com.example.billing.entity.BillingPeriod;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

@@ -1,6 +1,5 @@
-package devops.demo.billing.entity;
+package com.example.billing.entity;
 
-import devops.demo.billing.entity.BillingRate;
 import org.junit.Test;
 
 import java.math.BigDecimal;

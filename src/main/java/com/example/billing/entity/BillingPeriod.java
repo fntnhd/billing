@@ -1,7 +1,6 @@
-package devops.demo.billing.entity;
+package com.example.billing.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * A billing period specifies the start and end dates for which bills will be generated.

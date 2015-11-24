@@ -1,7 +1,7 @@
-package devops.demo.billing.service;
+package com.example.billing.service;
 
-import devops.demo.billing.entity.Account;
-import devops.demo.billing.entity.BillingPeriod;
+import com.example.billing.entity.Account;
+import com.example.billing.entity.BillingPeriod;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

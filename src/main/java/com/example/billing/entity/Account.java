@@ -1,4 +1,4 @@
-package devops.demo.billing.entity;
+package com.example.billing.entity;
 
 /**
  * Encapsulates basic information about a customer account.
