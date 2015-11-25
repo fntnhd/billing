@@ -2,8 +2,6 @@ package com.example.billing.dao.impl;
 
 import com.example.billing.dao.AccountDao;
 import com.example.billing.entity.Account;
-import com.example.billing.entity.BillingPlan;
-import com.example.billing.exception.ValidationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -23,22 +21,11 @@ public class AccountDaoImpl implements AccountDao {
     /**
      * Creates a new account
      *
-     * @param phoneNumber
-     * @param billingPlan
+     * @param account
      * @return Account
-     * @see BillingPlan
      */
-    public synchronized Account createAccount(String phoneNumber, BillingPlan billingPlan) throws ValidationException {
-        Account account = new Account();
-        account.setPhoneNumber(phoneNumber);
-        account.setBillingPlan(billingPlan);
-        account.validate();
-
-        if(ACCOUNTS.get(account.getPhoneNumber()) != null) {
-            throw new ValidationException("Account already exists for phone number: " + account.getPhoneNumber());
-        }
-
-        ACCOUNTS.put(phoneNumber, account);
+    public Account save(Account account) {
+        ACCOUNTS.put(account.getPhoneNumber(), account);
 
         return account;
     }

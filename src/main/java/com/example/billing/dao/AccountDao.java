@@ -1,12 +1,9 @@
 package com.example.billing.dao;
 
 import com.example.billing.entity.Account;
-import com.example.billing.entity.BillingPlan;
-import com.example.billing.exception.ValidationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by MrSteveAndrews on 11/23/15.
@@ -17,12 +14,10 @@ public interface AccountDao {
     /**
      * Creates a new account
      *
-     * @param phoneNumber
-     * @param billingPlan
+     * @param account
      * @return Account
-     * @see BillingPlan
      */
-    public Account createAccount(String phoneNumber, BillingPlan billingPlan) throws ValidationException;
+    public Account save(Account account);
 
     /**
      * Returns an account for the specified phone number
@@ -36,7 +31,7 @@ public interface AccountDao {
     /**
      * Deletes all accounts in the system.
      */
-    void deleteAll();
+    public void deleteAll();
 
     /**
      * Returns all accounts in the system.

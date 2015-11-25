@@ -16,7 +16,6 @@ import java.util.Collection;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.fail;
 
 /**
  * Ensures that PhoneNumberValidator works correctly.
@@ -25,16 +24,14 @@ import static junit.framework.TestCase.fail;
 @ContextConfiguration(locations = {"/application-context.xml"})
 public class AccountDaoTest {
 
-    private BillingPlan billingPlan = null;
+    private BillingPlan defaultBillingPlan = null;
 
     @Autowired
     private AccountDao accountDao;
 
     @Before
     public void setupBillingPlan() {
-        billingPlan = new BillingPlan();
-        billingPlan.setName("Anytime Minutes");
-        billingPlan.setBillingRate(new BillingRate("0.10"));
+        defaultBillingPlan = newBillingPlan("Anytime Minutes", "0.10");
     }
 
     @After
@@ -50,53 +47,79 @@ public class AccountDaoTest {
     }
 
     @Test
-    public void createAccount() throws ValidationException {
-        Account account = accountDao.createAccount("206-555-1212", billingPlan);
+    public void saveNewAccount() {
+        Account newAccount = new Account();
+        newAccount.setPhoneNumber("206-555-1212");
+        newAccount.setBillingPlan(defaultBillingPlan);
 
-        assertEquals("206-555-1212", account.getPhoneNumber());
-        assertEquals(new BillingRate("0.10"), account.getBillingPlan().getBillingRate());
+        accountDao.save(newAccount);
+        Account savedAccount = accountDao.findAccountByPhoneNumber("206-555-1212");
+
+        assertEquals("206-555-1212", savedAccount.getPhoneNumber());
+        assertEquals(new BillingRate("0.10"), savedAccount.getBillingPlan().getBillingRate());
     }
 
     @Test
-    public void createDuplicateAccount() {
-        try {
-            accountDao.createAccount("206-555-1212", billingPlan);
-            accountDao.createAccount("206-555-1212", billingPlan);
-            fail("Duplicate account creation was allowed.");
-        }
-        catch(ValidationException ve) {
-            assertEquals("Account already exists for phone number: 206-555-1212", ve.getMessage());
-        }
+    public void saveUpdatedAccount() {
+        Account newAccount = new Account();
+        newAccount.setPhoneNumber("206-555-1212");
+        newAccount.setBillingPlan(defaultBillingPlan);
+        accountDao.save(newAccount);
+        BillingPlan billingPlan = newBillingPlan("Super Saver Plan", ".08");
+
+        Account account = accountDao.findAccountByPhoneNumber("206-555-1212");
+        account.setBillingPlan(billingPlan);
+        accountDao.save(account);
+        Account savedAccount = accountDao.findAccountByPhoneNumber("206-555-1212");
+
+        assertEquals("206-555-1212", savedAccount.getPhoneNumber());
+        assertEquals(new BillingRate("0.08"), savedAccount.getBillingPlan().getBillingRate());
     }
 
     @Test
     public void findAccountByPhoneNumber() throws ValidationException {
-        accountDao.createAccount("206-555-1212", billingPlan);
-        accountDao.createAccount("703-555-1212", billingPlan);
-        accountDao.createAccount("425-555-1212", billingPlan);
+        Account account = newAccount("206-555-1212", defaultBillingPlan);
+        accountDao.save(account);
+        account = newAccount("703-555-1212", defaultBillingPlan);
+        accountDao.save(account);
+        account = newAccount("425-555-1212", defaultBillingPlan);
+        accountDao.save(account);
 
-        Account account = accountDao.findAccountByPhoneNumber("703-555-1212");
+        account = accountDao.findAccountByPhoneNumber("703-555-1212");
 
         assertEquals("703-555-1212", account.getPhoneNumber());
     }
 
     @Test
     public void findAll() throws ValidationException {
-        accountDao.createAccount("206-555-1212", billingPlan);
-        accountDao.createAccount("703-555-1212", billingPlan);
-        accountDao.createAccount("425-555-1212", billingPlan);
-        accountDao.createAccount("423-555-1212", billingPlan);
+        Account account = newAccount("206-555-1212", defaultBillingPlan);
+        accountDao.save(account);
+        account = newAccount("703-555-1212", defaultBillingPlan);
+        accountDao.save(account);
+        account = newAccount("425-555-1212", defaultBillingPlan);
+        accountDao.save(account);
+        account = newAccount("423-555-1212", defaultBillingPlan);
+        accountDao.save(account);
 
         Collection<Account> accountList = accountDao.findAll();
 
         assertEquals(4, accountList.size());
     }
 
-    @Test
-    public void normalizePhoneNumber() throws ValidationException {
-        Account account = accountDao.createAccount("7025551212", billingPlan);
+    private Account newAccount(String phoneNumber, BillingPlan billingPlan) {
+        Account account = new Account();
+        account.setPhoneNumber(phoneNumber);
+        account.setBillingPlan(billingPlan);
 
-        assertEquals("702-555-1212", account.getPhoneNumber());
+        return account;
+    }
+
+    private BillingPlan newBillingPlan(String name, String rate) {
+        BillingPlan billingPlan = new BillingPlan();
+        billingPlan.setName(name);
+        billingPlan.setBillingRate(new BillingRate(rate));
+
+        return billingPlan;
     }
 
 }
