@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 import static junit.framework.TestCase.assertEquals;
@@ -55,7 +54,7 @@ public class AccountDaoTest {
         Account account = accountDao.createAccount("206-555-1212", billingPlan);
 
         assertEquals("206-555-1212", account.getPhoneNumber());
-        assertEquals(new BigDecimal("0.10"), account.getBillingPlan().getBillingRate());
+        assertEquals(new BillingRate("0.10"), account.getBillingPlan().getBillingRate());
     }
 
     @Test
