@@ -9,7 +9,16 @@ import java.math.BigDecimal;
  */
 public class BillingPlan {
 
+    private String name;
     private BigDecimal billingRate;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public BigDecimal getBillingRate() {
         return billingRate;

@@ -2,6 +2,7 @@ package com.example.billing.dao;
 
 import com.example.billing.entity.Account;
 import com.example.billing.entity.BillingPlan;
+import com.example.billing.exception.ValidationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -21,7 +22,7 @@ public interface AccountDao {
      * @return Account
      * @see BillingPlan
      */
-    public Account createAccount(String phoneNumber, BillingPlan billingPlan);
+    public Account createAccount(String phoneNumber, BillingPlan billingPlan) throws ValidationException;
 
     /**
      * Returns an account for the specified phone number

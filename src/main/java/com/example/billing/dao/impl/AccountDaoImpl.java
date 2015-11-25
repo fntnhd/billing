@@ -3,12 +3,13 @@ package com.example.billing.dao.impl;
 import com.example.billing.dao.AccountDao;
 import com.example.billing.entity.Account;
 import com.example.billing.entity.BillingPlan;
+import com.example.billing.exception.ValidationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 /**
- * Created by MrSteveAndrews on 11/23/15.
+ * Responsible for saving and finding accounts.
  */
 @Repository
 public class AccountDaoImpl implements AccountDao {
@@ -27,10 +28,15 @@ public class AccountDaoImpl implements AccountDao {
      * @return Account
      * @see BillingPlan
      */
-    public Account createAccount(String phoneNumber, BillingPlan billingPlan) {
+    public synchronized Account createAccount(String phoneNumber, BillingPlan billingPlan) throws ValidationException {
         Account account = new Account();
         account.setPhoneNumber(phoneNumber);
         account.setBillingPlan(billingPlan);
+        account.validate();
+
+        if(ACCOUNTS.get(account.getPhoneNumber()) != null) {
+            throw new ValidationException("Account already exists for phone number: " + account.getPhoneNumber());
+        }
 
         ACCOUNTS.put(phoneNumber, account);
 
