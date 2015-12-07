@@ -17,20 +17,20 @@ public interface AccountService {
      * @param account The account to create
      * @return
      */
-    public Account createAccount(Account account) throws ValidationException;
+    Account createAccount(Account account) throws ValidationException;
 
     /**
      * Update an account
      * @param account The account to update
      * @return
      */
-    public Account updateAccount(Account account) throws ValidationException;
+    Account updateAccount(Account account) throws ValidationException;
 
     /**
      * Answers all the accounts in the system.
      * @return
      */
-    public Collection<Account> findAll();
+    Collection<Account> findAll();
 
     /**
      * Returns an account for the specified phone number
@@ -38,10 +38,10 @@ public interface AccountService {
      * @param phoneNumber
      * @return Account
      */
-    public Account findAccountByPhoneNumber(String phoneNumber);
+    Account findAccountByPhoneNumber(String phoneNumber);
 
     /**
      * Deletes all accounts in the system.
      */
-    public void deleteAll();
+    void deleteAll();
 }
