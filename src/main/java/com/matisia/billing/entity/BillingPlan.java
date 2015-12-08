@@ -1,5 +1,7 @@
 package com.matisia.billing.entity;
 
+import com.matisia.billing.exception.ValidationException;
+
 import java.math.BigDecimal;
 
 /**
@@ -25,5 +27,15 @@ public class BillingPlan {
 
     public void setBillingRate(BillingRate billingRate) {
         this.billingRate = billingRate;
+    }
+
+    public void validate() throws ValidationException {
+        if(name == null) {
+            throw new ValidationException("Name is null");
+        }
+
+        if(billingRate == null) {
+            throw new ValidationException("Billing rate is null");
+        }
     }
 }

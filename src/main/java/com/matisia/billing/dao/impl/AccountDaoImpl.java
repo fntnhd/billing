@@ -12,7 +12,7 @@ import java.util.*;
 @Repository
 public class AccountDaoImpl implements AccountDao {
 
-    private static Map<String, Account> ACCOUNTS;
+    private static Map<String, Account> ACCOUNTS = null;
 
     static {
         ACCOUNTS = new HashMap<String, Account>();
