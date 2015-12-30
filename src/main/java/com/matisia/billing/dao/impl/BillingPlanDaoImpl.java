@@ -51,6 +51,18 @@ public class BillingPlanDaoImpl implements BillingPlanDao {
     }
 
     /**
+     * Deletes a billing plan
+     * @param billingPlan
+     * @return The deleted billing plan
+     * @throws ValidationException
+     */
+    public BillingPlan delete(BillingPlan billingPlan) throws ValidationException {
+        BillingPlan existingBillingPlan = BILLING_PLANS.get(billingPlan.getName());
+        BILLING_PLANS.remove(billingPlan.getName());
+        return existingBillingPlan;
+    }
+
+    /**
      * Delete all billing plans from the system.
      */
     public void deleteAll() {

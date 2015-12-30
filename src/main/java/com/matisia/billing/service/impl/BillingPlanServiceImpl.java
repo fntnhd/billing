@@ -30,7 +30,7 @@ public class BillingPlanServiceImpl implements BillingPlanService {
     /**
      * Creates a new
      * @param billingPlan
-     * @return
+     * @return The new billing plan
      */
     public BillingPlan createBillingPlan(BillingPlan billingPlan) throws ValidationException {
         billingPlan.validate();
@@ -49,9 +49,12 @@ public class BillingPlanServiceImpl implements BillingPlanService {
      * @throws ValidationException
      */
     public BillingPlan deleteBillingPlan(BillingPlan billingPlan) throws ValidationException {
-        throw new NotImplementedException();
+        return billingPlanDao.delete(billingPlan);
     }
 
+    /**
+     * Delete all billing plans in the system
+     */
     public void deleteAll() {
         billingPlanDao.deleteAll();
     }

@@ -35,6 +35,14 @@ public interface BillingPlanDao {
     Collection<BillingPlan> findAll();
 
     /**
+     * Deletes a billing plan
+     * @param billingPlan
+     * @return The billing plan that was deleted
+     * @throws ValidationException
+     */
+    public BillingPlan delete(BillingPlan billingPlan) throws ValidationException;
+
+    /**
      * Delete all billing plans from the system.
      */
     void deleteAll();
