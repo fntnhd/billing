@@ -24,6 +24,14 @@ public interface BillingPlanService {
      */
     BillingPlan createBillingPlan(BillingPlan billingPlan) throws ValidationException;
 
+    /**
+     * Deletes a billing plan
+     * @param billingPlan
+     * @return The billing plan that was deleted
+     * @throws ValidationException
+     */
+    BillingPlan deleteBillingPlan(BillingPlan billingPlan) throws ValidationException;
+
 
     /**
      * Deletes all billing plans
